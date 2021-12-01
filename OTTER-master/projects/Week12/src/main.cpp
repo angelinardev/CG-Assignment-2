@@ -169,6 +169,8 @@ bool initGLAD() {
 	return true;
 }
 
+GLuint shader_program;
+
 /// <summary>
 /// Draws a widget for saving or loading our scene
 /// </summary>
@@ -315,9 +317,16 @@ void CreateScene() {
 			{ ShaderPartType::Vertex, "shaders/vertex_shaders/terrainvert.glsl" },
 			{ ShaderPartType::Fragment, "shaders/fragment_shaders/terrainfrag.glsl" }
 		});
-		
+
+		Shader::Sptr WaterShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>
+		{
+			{ShaderPartType::Vertex, "shaders/vertex_shaders/watervert.glsl"},
+			{ ShaderPartType::Fragment,"shaders/fragment_shaders/waterfrag.glsl" }
+
+		});
+
 		// Load in the meshes
-		MeshResource::Sptr monkeyMesh = ResourceManager::CreateAsset<MeshResource>("Monkey.obj");
+		/*MeshResource::Sptr monkeyMesh = ResourceManager::CreateAsset<MeshResource>("Monkey.obj");*/
 		MeshResource::Sptr planeMesh = ResourceManager::CreateAsset<MeshResource>("plane.obj");
 
 		// Load in some textures
@@ -447,10 +456,19 @@ void CreateScene() {
 			heightMat->Set("u_Material.sand", sand);
 			heightMat->Set("u_Material.grass", grass);
 			heightMat->Set("u_Material.rock", rock);
-			//heightMat->Set("u_Material.DiffuseB", grass); 
+			//heightMat->Set("u_Material.DiffuseB", grass);  
 			heightMat->Set("u_Material.Shininess", 0.1f);
 			//max height
-			heightMat->Set("u_Scale", 1.0f); 
+			heightMat->Set("u_Scale", 1.0f);   
+		}   
+
+		Material::Sptr WaterMat = ResourceManager::CreateAsset<Material>(WaterShader);
+		{
+			Texture2D::Sptr water = ResourceManager::CreateAsset<Texture2D>("textures/waterm.png");
+			WaterMat->Name = "Water";
+			WaterMat->Set("u_Material.water", water);
+			WaterMat->Set("u_Scale", 1.0f);
+			WaterMat->Set("delta", 0.0f);
 		}
 		
 		// Create some lights for our scene
@@ -490,6 +508,24 @@ void CreateScene() {
 			RenderComponent::Sptr renderer = plane->Add<RenderComponent>();
 			renderer->SetMesh(planeMesh);
 			renderer->SetMaterial(heightMat);
+			
+
+			// Attach a plane collider that extends infinitely along the X/Y axis
+			//RigidBody::Sptr physics = plane->Add<RigidBody>(/*static by default*/);
+			//physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({ 0,0,-1 });
+		}
+
+		GameObject::Sptr plane2 = scene->CreateGameObject("Plane2");
+		{
+			// Set position in the scene
+			plane2->SetPostion(glm::vec3(3.09f, 3.14f, 2.64f));
+			plane2->SetRotation(glm::vec3(0.0f, 0.0f, 45.0f));
+			plane2->SetScale(glm::vec3(2.0f, 2.0f, 2.0f));
+			// Create and attach a RenderComponent to the object to draw our mesh
+			RenderComponent::Sptr renderer = plane2->Add<RenderComponent>();
+			renderer->SetMesh(planeMesh);
+			renderer->SetMaterial(WaterMat);
+
 
 			// Attach a plane collider that extends infinitely along the X/Y axis
 			//RigidBody::Sptr physics = plane->Add<RigidBody>(/*static by default*/);
@@ -777,6 +813,9 @@ int main() {
 
 	nlohmann::json editorSceneState;
 
+	GLfloat delta = 0.0;
+	GameObject::Sptr waterplane = scene->FindObjectByName("Plane2");
+
 	///// Game loop /////
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -785,7 +824,9 @@ int main() {
 		// Calculate the time since our last frame (dt)
 		double thisFrame = glfwGetTime();
 		float dt = static_cast<float>(thisFrame - lastFrame);
-
+	
+		delta += 0.0225;
+		waterplane->Get<RenderComponent>()->GetMaterial()->Set("delta", delta);
 		// Draw our material properties window!
 		DrawMaterialsWindow();
 
@@ -826,6 +867,7 @@ int main() {
 				// up all our components
 				scene->Window = window;
 				scene->Awake();
+
 			}
 			ImGui::Separator();
 			// Draw a dropdown to select our physics debug draw mode
@@ -966,7 +1008,7 @@ int main() {
 		// Enable alpha blending
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+		  
 		// Enable the scissor test;
 		glEnable(GL_SCISSOR_TEST);
 
