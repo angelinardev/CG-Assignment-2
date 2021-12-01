@@ -1,9 +1,7 @@
 #version 430
 
-layout(location = 0) in vec3 inWorldPos;
-layout(location = 1) in vec4 inColor;
-layout(location = 2) in vec3 inNormal;
-layout(location = 3) in vec2 inUV;
+#include "../fragments/fs_common_inputs.glsl"
+
 // We output a single color to the color buffer
 layout(location = 0) out vec4 frag_color;
 
@@ -18,15 +16,33 @@ struct Material {
 // Create a uniform for the material
 uniform Material u_Material;
 
+////////////////////////////////////////////////////////////////
+///////////// Application Level Uniforms ///////////////////////
+////////////////////////////////////////////////////////////////
+
+#include "../fragments/multiple_point_lights.glsl"
+
+////////////////////////////////////////////////////////////////
+/////////////// Frame Level Uniforms ///////////////////////////
+////////////////////////////////////////////////////////////////
+
+#include "../fragments/frame_uniforms.glsl"
 
 // https://learnopengl.com/Advanced-Lighting/Advanced-Lighting
 void main() {
 
-// Get the albedo from the diffuse / albedo map
+// Normalize our input normal
+	vec3 normal = normalize(inNormal);
+
+	// Use the lighting calculation that we included from our partial file
+	vec3 lightAccumulation = CalcAllLightContribution(inWorldPos, normal, u_CamPos.xyz, u_Material.Shininess);
+	// Get the albedo from the diffuse / albedo map
 	vec4 textureColor = texture(u_Material.water, inUV);
 
+	// combine for the final result
+	vec3 result = lightAccumulation  * inColor * textureColor.rgb;
 
-	frag_color = vec4(textureColor.r,textureColor.g,textureColor.b,0.5);
+	frag_color = vec4(result, 0.3);
 
 	}
 

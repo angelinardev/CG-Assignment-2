@@ -16,7 +16,7 @@ void main() {
 
 	vec3 displacedPos = inPosition +(inNormal * vert.z);
 
-	vert.z = (sin(vert.x * 2.5 + (delta/2)) * 0.01 + (sin(vert.y * 1.0 + (delta/2))*0.04));
+	vert.z = (sin(vert.x * 2.5 + (delta/2)) * 0.01 + (sin(vert.y * 5.0 + (delta/2))*0.1));
 
 	gl_Position = u_ModelViewProjection * vec4(vert, 1.0);
 

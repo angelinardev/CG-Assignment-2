@@ -261,55 +261,55 @@ void CreateScene() {
 	else {  
 		// This time we'll have 2 different shaders, and share data between both of them using the UBO
 		// This shader will handle reflective materials 
-		Shader::Sptr reflectiveShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_environment_reflective.glsl" }
-		});
+		//Shader::Sptr reflectiveShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_environment_reflective.glsl" }
+		//});
 
-		// This shader handles our basic materials without reflections (cause they expensive)
-		Shader::Sptr basicShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_blinn_phong_textured.glsl" }
-		});
+		//// This shader handles our basic materials without reflections (cause they expensive)
+		//Shader::Sptr basicShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_blinn_phong_textured.glsl" }
+		//});
 
-		// This shader handles our basic materials without reflections (cause they expensive)
-		Shader::Sptr specShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/textured_specular.glsl" }
-		});
+		//// This shader handles our basic materials without reflections (cause they expensive)
+		//Shader::Sptr specShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/textured_specular.glsl" }
+		//});
 
-		// This shader handles our foliage vertex shader example
-		Shader::Sptr foliageShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/foliage.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/screendoor_transparency.glsl" }
-		});
+		//// This shader handles our foliage vertex shader example
+		//Shader::Sptr foliageShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/foliage.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/screendoor_transparency.glsl" }
+		//});
 
-		// This shader handles our cel shading example
-		Shader::Sptr toonShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/toon_shading.glsl" }
-		});
+		//// This shader handles our cel shading example
+		//Shader::Sptr toonShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/toon_shading.glsl" }
+		//});
 
 
-		///////////////////// NEW SHADERS ////////////////////////////////////////////
+		/////////////////////// NEW SHADERS ////////////////////////////////////////////
 
-		// This shader handles our displacement mapping example
-		Shader::Sptr displacementShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/displacement_mapping.glsl" }, 
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_tangentspace_normal_maps.glsl" }
-		});    
+		//// This shader handles our displacement mapping example
+		//Shader::Sptr displacementShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/displacement_mapping.glsl" }, 
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_tangentspace_normal_maps.glsl" }
+		//});    
 
-		// This shader handles our displacement mapping example
-		Shader::Sptr tangentSpaceMapping = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_tangentspace_normal_maps.glsl" }
-		});
+		//// This shader handles our displacement mapping example
+		//Shader::Sptr tangentSpaceMapping = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/basic.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_tangentspace_normal_maps.glsl" }
+		//});
 
-		// This shader handles our multitexturing example
-		Shader::Sptr multiTextureShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shaders/vert_multitextured.glsl" },
-			{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_multitextured.glsl" }
-		});
+		//// This shader handles our multitexturing example
+		//Shader::Sptr multiTextureShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+		//	{ ShaderPartType::Vertex, "shaders/vertex_shaders/vert_multitextured.glsl" },
+		//	{ ShaderPartType::Fragment, "shaders/fragment_shaders/frag_multitextured.glsl" }
+		//});
 
 		//shader for our heightmap
 		Shader::Sptr terrainShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>
@@ -358,91 +358,91 @@ void CreateScene() {
 
 		// Create our materials
 		// This will be our box material, with no environment reflections
-		Material::Sptr boxMaterial = ResourceManager::CreateAsset<Material>(basicShader);
-		{
-			boxMaterial->Name = "Box";
-			boxMaterial->Set("u_Material.Diffuse", boxTexture);
-			boxMaterial->Set("u_Material.Shininess", 0.1f);
-		}
+		//Material::Sptr boxMaterial = ResourceManager::CreateAsset<Material>(basicShader);
+		//{
+		//	boxMaterial->Name = "Box";
+		//	boxMaterial->Set("u_Material.Diffuse", boxTexture);
+		//	boxMaterial->Set("u_Material.Shininess", 0.1f);
+		//}
 
-		// This will be the reflective material, we'll make the whole thing 90% reflective
-		Material::Sptr monkeyMaterial = ResourceManager::CreateAsset<Material>(reflectiveShader);
-		{
-			monkeyMaterial->Name = "Monkey";
-			monkeyMaterial->Set("u_Material.Diffuse", monkeyTex);
-			monkeyMaterial->Set("u_Material.Shininess", 0.5f);
-		}
+		//// This will be the reflective material, we'll make the whole thing 90% reflective
+		//Material::Sptr monkeyMaterial = ResourceManager::CreateAsset<Material>(reflectiveShader);
+		//{
+		//	monkeyMaterial->Name = "Monkey";
+		//	monkeyMaterial->Set("u_Material.Diffuse", monkeyTex);
+		//	monkeyMaterial->Set("u_Material.Shininess", 0.5f);
+		//}
 
-		// This will be the reflective material, we'll make the whole thing 90% reflective
-		Material::Sptr testMaterial = ResourceManager::CreateAsset<Material>(specShader);
-		{
-			testMaterial->Name = "Box-Specular";
-			testMaterial->Set("u_Material.Diffuse", boxTexture);
-			testMaterial->Set("u_Material.Specular", boxSpec);
-		}
+		//// This will be the reflective material, we'll make the whole thing 90% reflective
+		//Material::Sptr testMaterial = ResourceManager::CreateAsset<Material>(specShader);
+		//{
+		//	testMaterial->Name = "Box-Specular";
+		//	testMaterial->Set("u_Material.Diffuse", boxTexture);
+		//	testMaterial->Set("u_Material.Specular", boxSpec);
+		//}
 
-		// Our foliage vertex shader material
-		Material::Sptr foliageMaterial = ResourceManager::CreateAsset<Material>(foliageShader);
-		{
-			foliageMaterial->Name = "Foliage Shader";
-			foliageMaterial->Set("u_Material.Diffuse", leafTex);
-			foliageMaterial->Set("u_Material.Shininess", 0.1f);
-			foliageMaterial->Set("u_Material.Threshold", 0.1f);
+		//// Our foliage vertex shader material
+		//Material::Sptr foliageMaterial = ResourceManager::CreateAsset<Material>(foliageShader);
+		//{
+		//	foliageMaterial->Name = "Foliage Shader";
+		//	foliageMaterial->Set("u_Material.Diffuse", leafTex);
+		//	foliageMaterial->Set("u_Material.Shininess", 0.1f);
+		//	foliageMaterial->Set("u_Material.Threshold", 0.1f);
 
-			foliageMaterial->Set("u_WindDirection", glm::vec3(1.0f, 1.0f, 0.0f));
-			foliageMaterial->Set("u_WindStrength",  0.5f);
-			foliageMaterial->Set("u_VerticalScale", 1.0f);
-			foliageMaterial->Set("u_WindSpeed",     1.0f);
-		}
+		//	foliageMaterial->Set("u_WindDirection", glm::vec3(1.0f, 1.0f, 0.0f));
+		//	foliageMaterial->Set("u_WindStrength",  0.5f);
+		//	foliageMaterial->Set("u_VerticalScale", 1.0f);
+		//	foliageMaterial->Set("u_WindSpeed",     1.0f);
+		//}
 
-		// Our toon shader material
-		Material::Sptr toonMaterial = ResourceManager::CreateAsset<Material>(toonShader);
-		{
-			toonMaterial->Name = "Toon";
-			toonMaterial->Set("u_Material.Diffuse", boxTexture);
-			toonMaterial->Set("u_Material.Shininess", 0.1f);
-			toonMaterial->Set("u_Material.Steps", 8);
-		}
+		//// Our toon shader material
+		//Material::Sptr toonMaterial = ResourceManager::CreateAsset<Material>(toonShader);
+		//{
+		//	toonMaterial->Name = "Toon";
+		//	toonMaterial->Set("u_Material.Diffuse", boxTexture);
+		//	toonMaterial->Set("u_Material.Shininess", 0.1f);
+		//	toonMaterial->Set("u_Material.Steps", 8);
+		//}
 
-		/////////////// NEW MATERIALS ////////////////////
+		///////////////// NEW MATERIALS ////////////////////
 
-		Material::Sptr displacementTest = ResourceManager::CreateAsset<Material>(displacementShader);
-		{
-			Texture2D::Sptr displacementMap = ResourceManager::CreateAsset<Texture2D>("textures/displacement_map.png");
-			Texture2D::Sptr normalMap       = ResourceManager::CreateAsset<Texture2D>("textures/normal_map.png");
-			Texture2D::Sptr diffuseMap      = ResourceManager::CreateAsset<Texture2D>("textures/bricks_diffuse.png");
+		//Material::Sptr displacementTest = ResourceManager::CreateAsset<Material>(displacementShader);
+		//{
+		//	Texture2D::Sptr displacementMap = ResourceManager::CreateAsset<Texture2D>("textures/displacement_map.png");
+		//	Texture2D::Sptr normalMap       = ResourceManager::CreateAsset<Texture2D>("textures/normal_map.png");
+		//	Texture2D::Sptr diffuseMap      = ResourceManager::CreateAsset<Texture2D>("textures/bricks_diffuse.png");
 
-			displacementTest->Name = "Displacement Map";
-			displacementTest->Set("u_Material.Diffuse", diffuseMap);   
-			displacementTest->Set("s_Heightmap", displacementMap);
-			displacementTest->Set("s_NormalMap", normalMap);  
-			displacementTest->Set("u_Material.Shininess", 0.5f); 
-			displacementTest->Set("u_Scale", 0.1f);   
-		}
-		
-		Material::Sptr normalmapMat = ResourceManager::CreateAsset<Material>(tangentSpaceMapping);
-		{
-			Texture2D::Sptr normalMap       = ResourceManager::CreateAsset<Texture2D>("textures/normal_map.png");
-			Texture2D::Sptr diffuseMap      = ResourceManager::CreateAsset<Texture2D>("textures/bricks_diffuse.png");
+		//	displacementTest->Name = "Displacement Map";
+		//	displacementTest->Set("u_Material.Diffuse", diffuseMap);   
+		//	displacementTest->Set("s_Heightmap", displacementMap);
+		//	displacementTest->Set("s_NormalMap", normalMap);  
+		//	displacementTest->Set("u_Material.Shininess", 0.5f); 
+		//	displacementTest->Set("u_Scale", 0.1f);   
+		//}
+		//
+		//Material::Sptr normalmapMat = ResourceManager::CreateAsset<Material>(tangentSpaceMapping);
+		//{
+		//	Texture2D::Sptr normalMap       = ResourceManager::CreateAsset<Texture2D>("textures/normal_map.png");
+		//	Texture2D::Sptr diffuseMap      = ResourceManager::CreateAsset<Texture2D>("textures/bricks_diffuse.png");
 
-			normalmapMat->Name = "Tangent Space Normal Map";
-			normalmapMat->Set("u_Material.Diffuse", diffuseMap);
-			normalmapMat->Set("s_NormalMap", normalMap);
-			normalmapMat->Set("u_Material.Shininess", 0.5f);
-			normalmapMat->Set("u_Scale", 0.1f);
-		}
+		//	normalmapMat->Name = "Tangent Space Normal Map";
+		//	normalmapMat->Set("u_Material.Diffuse", diffuseMap);
+		//	normalmapMat->Set("s_NormalMap", normalMap);
+		//	normalmapMat->Set("u_Material.Shininess", 0.5f);
+		//	normalmapMat->Set("u_Scale", 0.1f);
+		//}
 
-		Material::Sptr multiTextureMat = ResourceManager::CreateAsset<Material>(multiTextureShader); 
-		{
-			Texture2D::Sptr sand  = ResourceManager::CreateAsset<Texture2D>("textures/terrain/sand.png");
-			Texture2D::Sptr grass = ResourceManager::CreateAsset<Texture2D>("textures/terrain/grass.png");
+		//Material::Sptr multiTextureMat = ResourceManager::CreateAsset<Material>(multiTextureShader); 
+		//{
+		//	Texture2D::Sptr sand  = ResourceManager::CreateAsset<Texture2D>("textures/terrain/sand.png");
+		//	Texture2D::Sptr grass = ResourceManager::CreateAsset<Texture2D>("textures/terrain/grass.png");
 
-			multiTextureMat->Name = "Multitexturing";
-			multiTextureMat->Set("u_Material.DiffuseA", sand);
-			multiTextureMat->Set("u_Material.DiffuseB", grass); 
-			multiTextureMat->Set("u_Material.Shininess", 0.5f);
-			multiTextureMat->Set("u_Scale", 0.1f); 
-		}
+		//	multiTextureMat->Name = "Multitexturing";
+		//	multiTextureMat->Set("u_Material.DiffuseA", sand);
+		//	multiTextureMat->Set("u_Material.DiffuseB", grass); 
+		//	multiTextureMat->Set("u_Material.Shininess", 0.5f);
+		//	multiTextureMat->Set("u_Scale", 0.1f); 
+		//}
 		
 		Material::Sptr heightMat = ResourceManager::CreateAsset<Material>(terrainShader);
 		{
@@ -464,7 +464,7 @@ void CreateScene() {
 
 		Material::Sptr WaterMat = ResourceManager::CreateAsset<Material>(WaterShader);
 		{
-			Texture2D::Sptr water = ResourceManager::CreateAsset<Texture2D>("textures/waterm.png");
+			Texture2D::Sptr water = ResourceManager::CreateAsset<Texture2D>("textures/water.png");
 			WaterMat->Name = "Water";
 			WaterMat->Set("u_Material.water", water);
 			WaterMat->Set("u_Scale", 1.0f);
@@ -1016,14 +1016,15 @@ int main() {
 		glm::mat4 proj = glm::ortho(0.0f, (float)windowSize.x, (float)windowSize.y, 0.0f, -1.0f, 1.0f);
 		GuiBatcher::SetProjection(proj);
 
+	
 		// Iterate over and render all the GUI objects
 		scene->RenderGUI();
-
+		
 		// Flush the Gui Batch renderer
 		GuiBatcher::Flush();
 
 		// Disable alpha blending
-		glDisable(GL_BLEND);
+		//glDisable(GL_BLEND);
 		// Disable scissor testing
 		glDisable(GL_SCISSOR_TEST);
 		// Re-enable depth writing
